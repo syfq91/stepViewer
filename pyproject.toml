@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stepviewer"
+version = "0.1.0"
+description = "Arrange STEP models (house shell and furniture) on a floor plan"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "PySide6-Essentials>=6.6",
+    "vtk>=9.3",
+    "cascadio==0.1.1",
+    "trimesh>=4.0",
+    "numpy>=1.24",
+    "cadquery-ocp==7.8.1.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-qt>=4.2",
+]
+
+[project.scripts]
+stepviewer = "stepviewer.app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stepviewer"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: slow integration tests that run the CAD kernels",
+]
